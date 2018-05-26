@@ -5,11 +5,12 @@ Created on Thu May 24 20:25:44 2018
 
 __author__ = "Andrew I McClement"
 
+from random import randint
 from time import sleep
+
 from evaluator import get_letter_from_integer, PasswordChecker
 from evaluator import get_random_letter
 from evaluator import MIN_PASSWORD_LENGTH, MAX_PASSWORD_LENGTH
-from random import randint
 
 
 class StupidSolver:
@@ -55,7 +56,7 @@ class ReallyStupidSolver:
                 return guess
 
 
-if __name__ == "__main__":
+def main():
     puzzles = [PasswordChecker() for _ in range(10)]
     stupid_solvers = [StupidSolver(checker) for checker in puzzles]
     stupid_solutions = [(solver.solve(), solver.guess)
@@ -71,4 +72,8 @@ if __name__ == "__main__":
                           for checker in puzzles]
 
     print(terrible_solutions)
+
+
+if __name__ == "__main__":
+    main()
     sleep(5)
