@@ -7,20 +7,44 @@ __author__ = "Andrew I McClement"
 
 from random import randint
 
+CHARACTERS_PERMITTED = 26
+MIN_PASSWORD_LENGTH = 5
+MAX_PASSWORD_LENGTH = 100
+
 
 def get_random_letter():
-    return chr(97 + randint(0, 25))
+    return get_letter_from_integer(randint(0, CHARACTERS_PERMITTED - 1))
+
+
+def get_letter_from_integer(integer: int) -> str:
+    return chr(97 + integer)
 
 
 class PasswordChecker:
-    def __init__(self):
-        self._length = randint(5, 100)
-        self._password = "".join((get_random_letter()
-                                 for i in range(self._length)))
+    def __init__(self, password=None):
+        self._length = randint(MIN_PASSWORD_LENGTH, MAX_PASSWORD_LENGTH)
+        if password is None:
+            self._password = self.create_password(self._length)
+        else:
+            self._password = password
+
+        self._attempts = 0
 
     def check_guess(self, guess) -> (int, bool):
         successes = sum((x[0] == x[1] for x in zip(self._password, guess)))
+        self._attempts += 1
         return successes, guess == self._password
+
+    @property
+    def attempts(self):
+        return self._attempts
+
+    @staticmethod
+    def create_password(length):
+        return "".join((get_random_letter() for i in range(length)))
+
+    def reset(self):
+        self._attempts = 0
 
 
 if __name__ == "__main__":
