@@ -67,11 +67,12 @@ def main():
     for checker in puzzles:
         checker.reset()
 
-    solver = ReallyStupidSolver()
-    terrible_solutions = [(solver.solve(checker), checker.attemps)
-                          for checker in puzzles]
+    if input("Are you sure you want to proceed with the really stupid stuff?"):
+        solver = ReallyStupidSolver()
+        terrible_solutions = [(solver.solve(checker), checker.attemps)
+                              for checker in puzzles]
 
-    print(terrible_solutions)
+        print(terrible_solutions)
 
 
 if __name__ == "__main__":

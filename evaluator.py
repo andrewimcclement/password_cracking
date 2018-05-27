@@ -21,14 +21,9 @@ def get_letter_from_integer(integer: int) -> str:
 
 
 class PasswordChecker:
-    def __init__(self, password=None):
-        self._length = randint(MIN_PASSWORD_LENGTH, MAX_PASSWORD_LENGTH)
-        if password is None:
-            self._password = self.create_password(self._length)
-        else:
-            self._password = password
-
-        self._attempts = 0
+    def __init__(self):
+        self.reset()
+        self.regenerate()
 
     def check_guess(self, guess) -> (int, bool):
         successes = sum((x[0] == x[1] for x in zip(self._password, guess)))
@@ -45,6 +40,8 @@ class PasswordChecker:
 
     def reset(self):
         self._attempts = 0
+
+    def regenerate(self):
         self._length = randint(MIN_PASSWORD_LENGTH, MAX_PASSWORD_LENGTH)
         self._password = self.create_password(self._length)
 
