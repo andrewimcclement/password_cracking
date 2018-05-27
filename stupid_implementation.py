@@ -13,7 +13,7 @@ from evaluator import get_random_letter
 from evaluator import MIN_PASSWORD_LENGTH, MAX_PASSWORD_LENGTH
 
 
-class StupidSolver:
+class SensibleSolver:
     def __init__(self, checker: PasswordChecker):
         self.checker = checker
         self.guess = None
@@ -58,11 +58,11 @@ class ReallyStupidSolver:
 
 def main():
     puzzles = [PasswordChecker() for _ in range(10)]
-    stupid_solvers = [StupidSolver(checker) for checker in puzzles]
-    stupid_solutions = [(solver.solve(), solver.guess)
-                        for solver in stupid_solvers]
+    sensible_solvers = [SensibleSolver(checker) for checker in puzzles]
+    sensible_solutions = [(solver.solve(), solver.guess)
+                          for solver in sensible_solvers]
 
-    print(stupid_solutions)
+    print(sensible_solutions)
 
     for checker in puzzles:
         checker.reset()

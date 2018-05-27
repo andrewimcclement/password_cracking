@@ -45,6 +45,8 @@ class PasswordChecker:
 
     def reset(self):
         self._attempts = 0
+        self._length = randint(MIN_PASSWORD_LENGTH, MAX_PASSWORD_LENGTH)
+        self._password = self.create_password(self._length)
 
 
 if __name__ == "__main__":
